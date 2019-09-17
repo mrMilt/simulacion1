@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import lib.RunPoker;
 import logic.CuadradosMedios;
+import logic.Distribucion;
 
 /**
  *
@@ -42,7 +43,17 @@ public class Controlador implements ActionListener {
     }
 
     private void obtenerCuadradosMedios() {
-        main.agregarNumeros(cuadradosMedios.calcular(Integer.parseInt(main.getTxtCantidad()), Integer.parseInt(main.getTxtSemilla()), Integer.parseInt(main.getTxtK())));
+        switch(main.getDistribucionSeleccionada()){
+            case 0:
+                main.agregarNumeros(cuadradosMedios.calcular(Integer.parseInt(main.getTxtCantidad()), Integer.parseInt(main.getTxtSemilla()), Integer.parseInt(main.getTxtK())));
+                break;
+            case 1:
+                main.agregarNumeros(Distribucion.obtenerNiNormales(cuadradosMedios.calcular(Integer.parseInt(main.getTxtCantidad()), Integer.parseInt(main.getTxtSemilla()), Integer.parseInt(main.getTxtK()))));
+                break;
+            case 2:
+                main.agregarNumeros(Distribucion.obtenerNiUniformes(cuadradosMedios.calcular(Integer.parseInt(main.getTxtCantidad()), Integer.parseInt(main.getTxtSemilla()), Integer.parseInt(main.getTxtK())), main.getMinimo(), main.getMaximo()));
+                break;
+        }
     }
 
     private void pruebasAleatoriedad() {

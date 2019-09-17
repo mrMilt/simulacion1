@@ -16,6 +16,7 @@ import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 
@@ -32,6 +33,7 @@ public class Main extends javax.swing.JFrame {
         setBackground(Color.WHITE);
         initComponents();
         agregarEventos(controlador);
+        habilitar(false);
     }
 
     /**
@@ -55,9 +57,17 @@ public class Main extends javax.swing.JFrame {
         txtSemilla = new javax.swing.JTextField();
         txtK = new javax.swing.JTextField();
         btnGenerar = new javax.swing.JButton();
+        distribucion = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        lblMax = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblMin = new javax.swing.JLabel();
+        maximo = new javax.swing.JTextField();
+        minimo = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         lblkghg = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         chkChi2 = new javax.swing.JCheckBox();
         chkKS = new javax.swing.JCheckBox();
@@ -116,12 +126,37 @@ public class Main extends javax.swing.JFrame {
         btnGenerar.setText("Generar numeros");
         btnGenerar.setActionCommand("");
 
+        distribucion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Puros", "Distribución normal", "Distribución uniforme" }));
+        distribucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escogerDistribucion(evt);
+            }
+        });
+
+        jLabel5.setText("Numeros:");
+
+        lblMax.setText("Maximo");
+
+        lblMin.setText("Minimo");
+
+        maximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maximoActionPerformed(evt);
+            }
+        });
+
+        minimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                minimoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(238, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -135,30 +170,61 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                         .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(151, 151, 151))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(222, 222, 222)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblMin)
+                                .addComponent(lblMax)))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(distribucion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(minimo)
+                            .addComponent(maximo))))
+                .addGap(89, 89, 89))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGenerar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtSemilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(distribucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSemilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblMax)
+                                .addComponent(maximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMin, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(minimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Cuadrados medios", jPanel2);
@@ -178,7 +244,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(lblkghg)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(333, Short.MAX_VALUE)
+                .addContainerGap(415, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(277, 277, 277))
         );
@@ -192,7 +258,20 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(98, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab2", jPanel5);
+        jTabbedPane1.addTab("Congruencia Lineal", jPanel5);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 765, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 208, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Congruencia multiplicativa", jPanel6);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Pruebas de uniformidad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -372,6 +451,35 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_chkMediasActionPerformed
 
+    private void escogerDistribucion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escogerDistribucion
+        switch(distribucion.getSelectedIndex()){
+            case 0:
+                habilitar(false);
+                break;
+            case 1:
+                habilitar(false);
+                break;
+            case 2:
+                habilitar(true);
+                break;
+        }
+    }//GEN-LAST:event_escogerDistribucion
+
+    private void habilitar(boolean d){
+        lblMax.setVisible(d);
+        lblMin.setVisible(d);
+        maximo.setVisible(d);
+        minimo.setVisible(d);
+    }
+
+    public int getMaximo() {
+        return Integer.parseInt(maximo.getText());
+    }
+
+    public int getMinimo() {
+        return Integer.parseInt(minimo.getText());
+    }
+    
     private void txtSemillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSemillaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSemillaActionPerformed
@@ -379,6 +487,14 @@ public class Main extends javax.swing.JFrame {
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadActionPerformed
+
+    private void maximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maximoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maximoActionPerformed
+
+    private void minimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,31 +541,43 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkMedias;
     private javax.swing.JCheckBox chkPoker;
     private javax.swing.JCheckBox chkVarianzas;
+    private javax.swing.JComboBox<String> distribucion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblChi2;
     private javax.swing.JLabel lblKS;
+    private javax.swing.JLabel lblMax;
     private javax.swing.JLabel lblMedias;
+    private javax.swing.JLabel lblMin;
     private javax.swing.JLabel lblPoker;
     private javax.swing.JLabel lblVariazas;
     private javax.swing.JLabel lblkghg;
     private javax.swing.JList<String> listNumeros;
+    private javax.swing.JTextField maximo;
+    private javax.swing.JTextField minimo;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtK;
     private javax.swing.JTextField txtSemilla;
     // End of variables declaration//GEN-END:variables
   private DefaultListModel<String> modeloNumeros = new DefaultListModel<>();
 
+    public int getDistribucionSeleccionada(){
+        return distribucion.getSelectedIndex();
+    }
+  
     public String getTxtCantidad() {
         return txtCantidad.getText();
     }
