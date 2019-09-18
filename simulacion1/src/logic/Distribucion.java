@@ -36,11 +36,9 @@ public class Distribucion {
         return N;
     }
     /**
-     * 
-     * @param listaRi
-     * @param min
-     * @param max
-     * @return 
+     * Normaliza una lista de numeros pseudoaleatorios puros, tomando como media=0 y desviacion=1
+     * @param listaRi ArrayList de numeros pseudoaleatorios puros
+     * @return lista de numero pseudoaletorios normalizados
      */
     public static  ArrayList<Double> obtenerNiNormales(ArrayList<Double> listaRi) {
         ArrayList<Double> lN = new ArrayList<>();
@@ -49,7 +47,14 @@ public class Distribucion {
          }
         return lN;
     }
-     
+    
+    /**
+     * Obtiene una lista de numeros uniformes en un intervalo dado a partir de una lista de numeros pseudoaletorios puros
+     * @param listaRi ArrayList de numeros pseudoaleatorios puros
+     * @param min numero menor del intervalo en el que se desean generar los numeros
+     * @param max numero mayor del intervalo en el que se desean generar los numeros
+     * @return lista de numero pseudoaletorios uniformes
+     */
     public static ArrayList<Double> obtenerNiUniformes(ArrayList<Double> listaRi, int min, int max) {
         ArrayList<Double> lN = new ArrayList<>();
         for (int i = 0; i < listaRi.size(); i++) {

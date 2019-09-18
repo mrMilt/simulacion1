@@ -22,7 +22,11 @@ public class Prueba {
         }
         return listaNormalizados;
     }
-
+    /**
+     * Obtiene el numero mayor de una lista 
+     * @param listaNi lista de numeros a evaluar
+     * @return valor mayor de una lista
+     */
     private static double obtenerMax(ArrayList<Double> listaNi) {
         double max = listaNi.get(0);
         for (int i = 1; i < listaNi.size(); i++) {

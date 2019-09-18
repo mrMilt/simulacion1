@@ -34,6 +34,8 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         agregarEventos(controlador);
         habilitar(false);
+        habilitar1(false);
+        habilitar2(false);
     }
 
     /**
@@ -290,7 +292,7 @@ public class Main extends javax.swing.JFrame {
         distribucion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Puros", "Distribución normal", "Distribución uniforme" }));
         distribucion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                distribucion1escogerDistribucion(evt);
+                escogerDistribucion2(evt);
             }
         });
 
@@ -447,7 +449,7 @@ public class Main extends javax.swing.JFrame {
         distribucion2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Puros", "Distribución normal", "Distribución uniforme" }));
         distribucion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                distribucion2escogerDistribucion(evt);
+                escogerDistribucion3(evt);
             }
         });
 
@@ -779,6 +781,20 @@ public class Main extends javax.swing.JFrame {
         maximo.setVisible(d);
         minimo.setVisible(d);
     }
+    
+    private void habilitar1(boolean d){
+        lblMax1.setVisible(d);
+        lblMin1.setVisible(d);
+        maximo1.setVisible(d);
+        minimo1.setVisible(d);
+    }
+    
+    private void habilitar2(boolean d){
+        lblMax2.setVisible(d);
+        lblMin2.setVisible(d);
+        maximo2.setVisible(d);
+        minimo2.setVisible(d);
+    }
 
     public int getMaximo() {
         return Integer.parseInt(maximo.getText());
@@ -812,9 +828,19 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtKCLActionPerformed
 
-    private void distribucion1escogerDistribucion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distribucion1escogerDistribucion
-        // TODO add your handling code here:
-    }//GEN-LAST:event_distribucion1escogerDistribucion
+    private void escogerDistribucion2(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escogerDistribucion2
+        switch(distribucion1.getSelectedIndex()){
+            case 0:
+                habilitar1(false);
+                break;
+            case 1:
+                habilitar1(false);
+                break;
+            case 2:
+                habilitar1(true);
+                break;
+        }
+    }//GEN-LAST:event_escogerDistribucion2
 
     private void maximo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maximo1ActionPerformed
         // TODO add your handling code here:
@@ -840,9 +866,19 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_XoCMActionPerformed
 
-    private void distribucion2escogerDistribucion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_distribucion2escogerDistribucion
-        // TODO add your handling code here:
-    }//GEN-LAST:event_distribucion2escogerDistribucion
+    private void escogerDistribucion3(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escogerDistribucion3
+        switch(distribucion2.getSelectedIndex()){
+            case 0:
+                habilitar2(false);
+                break;
+            case 1:
+                habilitar2(false);
+                break;
+            case 2:
+                habilitar2(true);
+                break;
+        }
+    }//GEN-LAST:event_escogerDistribucion3
 
     private void maximo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maximo2ActionPerformed
         // TODO add your handling code here:
@@ -1045,6 +1081,30 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 lblPoker.setText("");
+            }
+        });
+        chkChi2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblChi2.setText("");
+            }
+        });
+        chkKS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblKS.setText("");
+            }
+        });
+        chkMedias.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblMedias.setText("");
+            }
+        });
+        chkVarianzas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lblVariazas.setText("");
             }
         });
     }
