@@ -8,33 +8,58 @@ package logic;
 import java.util.ArrayList;
 
 /**
+ * clase para representar em metodo de cuadrados medios
  *
  * @author Milton
  */
 public class CuadradosMedios {
 
+    //Numero semilla necesario para el metodo
     private String semilla;
 
+    /**
+     * Metodo para extraer las cifras de la mitad de un numero
+     *
+     * @param numero numero al cuadrado
+     * @param k longitud a izquierda y derecha para extraer las cifras de la
+     * mitad
+     * @return cifras de la mitad del numero
+     */
     private int extraerX(String numero, int k) {
         int longitud = numero.length();
         if (longitud % 2 > 0 || longitud < semilla.length()) {
+            System.out.println("-....");
             numero = rellenar(numero);
-            longitud++;
         }
-        System.out.println("" + numero);
-        System.out.println("n " + Integer.parseInt(numero.substring((longitud / 2) - k, (longitud / 2) + k)));
-//        System.out.println("" + numero.substring((longitud / 2) - k, (longitud / 2) + k));
-        return Integer.parseInt(numero.substring((longitud / 2) - k, (longitud / 2) + k));
+        System.out.println("se " + numero.length());
+        return Integer.parseInt(numero.substring((semilla.length() / 2) - k, (semilla.length() / 2) + k));
     }
 
+    /**
+     * Metodo para rellenar los nueros cuando son impares o faltan cifras
+     *
+     * @param numero
+     * @return numero rellenado con cifras faltantes
+     */
     private String rellenar(String numero) {
-        System.out.println("" + semilla.length() + "  " + numero.length());
-        for (int i = 0; i < (semilla.length() - numero.length()); i++) {
+        System.out.println("s1 " + semilla + "   -  " + numero + " " + (semilla.length() - numero.length()));
+        int diferencia = (semilla.length() - numero.length());
+        for (int i = 0; i < diferencia; i++) {
             numero = "0" + numero;
         }
         return numero;
     }
 
+    /**
+     * Metodo para calcular los numero pseudoaleatorios por el metodo de
+     * cuadrados medios
+     *
+     * @param cantidadNumeros cantidad de numeros pseudoaleatorios
+     * @param semilla numero inicial
+     * @param k longitud a izquierda y derecha para extraer las cifras de la
+     * mitad
+     * @return lista de numeros pseudoaleatorios
+     */
     public ArrayList<Double> calcular(int cantidadNumeros, int semilla, int k) {
         String semilla2 = (semilla * semilla) + "";
         this.semilla = (semilla2.length() % 2 > 0) ? "0" + semilla2 : semilla2 + "";

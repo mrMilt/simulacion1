@@ -3,25 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib;
+package logic.poker;
 
 /**
- *
+ *clase para representar cada tipo de probabilidad de poker
  * @author Milton
  */
 public class Poker {
     
+    //tipo de probabilidad
     protected Tipo tipo;
+    //cantidad de veces que aparece
     protected int cantidad;
+    //frecuencia obtenida 
     protected double Oi;
+    //frecuencia esperada
     protected double Ei;
 
+    
+    //metodo constructor
     public Poker(Tipo tipo, double probabilidad) {
         this.tipo = tipo;
         this.cantidad = 0;
         this.Oi = probabilidad;
         this.Ei = 0;
     }
+    
+    //geters y seters
 
     public Tipo getTipo() {
         return tipo;

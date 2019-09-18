@@ -8,12 +8,12 @@ package controller;
 import UI.Main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import lib.RunPoker;
 import logic.CongruenciaLineal;
 import logic.CongruenciaMultiplicativa;
 import logic.CuadradosMedios;
 import logic.Distribucion;
 import logic.Prueba;
+import logic.poker.PruebaPoker;
 
 /**
  *
@@ -22,13 +22,13 @@ import logic.Prueba;
 public class Controlador implements ActionListener {
 
     private CuadradosMedios cuadradosMedios;
-    private RunPoker runPoker;
+    private PruebaPoker pruebaPoker;
 
     private Main main;
 
     public Controlador() {
         this.cuadradosMedios = new CuadradosMedios();
-        this.runPoker = new RunPoker();
+        this.pruebaPoker = new PruebaPoker(5);
         this.main = new Main(this);
         this.main.setVisible(true);
     }
@@ -70,7 +70,7 @@ public class Controlador implements ActionListener {
 
     private void pruebasAleatoriedad() {
         if (main.pruebaPokerSeleccionada()) {
-            boolean esCorrecta = runPoker.calcular(main.getNumeros());
+            boolean esCorrecta = pruebaPoker.calcular(main.getNumeros());
             main.setLblPoker(esCorrecta ? "<Pasa la prueba>" : "<No pasa la prueba>");
         }
     }

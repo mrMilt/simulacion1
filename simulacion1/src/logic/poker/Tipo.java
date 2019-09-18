@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib;
+package logic.poker;
 
 /**
- *
+ *enumarado para representar los tipos de probabiliades de poker con cinco cartas
  * @author Milton
  */
 public enum Tipo {
