@@ -77,7 +77,7 @@ public class Controlador implements ActionListener {
     
     private void pruebasUniformidad() {
         if(main.pruebaChi2()){
-            main.setLblChi2(Prueba.ejecutarPruebaChi2(main.getNumeros(), 8)? "<Pasa la prueba>" : "<No pasa la prueba>");
+            main.setLblChi2(Prueba.ejecutarPruebaChi2(main.getNumeros(), main.getCantidadIntervalosChi2())? "<Pasa la prueba>" : "<No pasa la prueba>");
         }
         if(main.pruebaKS()){
             main.setLblKS(Prueba.ejecutarPruebaKS(main.getNumeros())? "<Pasa la prueba>" : "<No pasa la prueba>");

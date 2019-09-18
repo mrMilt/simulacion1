@@ -13,6 +13,11 @@ import java.util.ArrayList;
  */
 public class Prueba {
     
+    /**
+     * normaliza una lista de numeros 
+     * @param listaNi numeros pseudoaleatorios que se quieren normalizar
+     * @return lista de numeros normalizados
+     */
     private static ArrayList<Double> obtenerRiNormalizados(ArrayList<Double> listaNi){
         double max = obtenerMax(listaNi);
         double min = obtenerMin(listaNi);
@@ -23,9 +28,9 @@ public class Prueba {
         return listaNormalizados;
     }
     /**
-     * Obtiene el numero mayor de una lista 
+     * Obtiene el numero mayor de una lista de numeros
      * @param listaNi lista de numeros a evaluar
-     * @return valor mayor de una lista
+     * @return valor mayor de la lista
      */
     private static double obtenerMax(ArrayList<Double> listaNi) {
         double max = listaNi.get(0);
@@ -37,6 +42,11 @@ public class Prueba {
         return max;
     }
 
+    /**
+     * Obtiene el numero menor de una lista de numeros
+     * @param listaNi lista de numeros a evaluar
+     * @return valor menor de la lista
+     */
     private static double obtenerMin(ArrayList<Double> listaNi) {
         double min = listaNi.get(0);
         for (int i = 1; i < listaNi.size(); i++) {
@@ -47,6 +57,11 @@ public class Prueba {
         return min;
     }
     
+    /**
+     * obtiene el promedio de una lista de numero
+     * @param listaNi lista de numeros a evaluar
+     * @return promedio de la lista
+     */
     private static double obtenerPromedio(ArrayList<Double> listaNi){
         double promedio = 0;
         for (double ni : listaNi) {
@@ -55,11 +70,17 @@ public class Prueba {
         return promedio/listaNi.size();
     }
     
-    public static boolean ejecutarPruebaMedias(ArrayList<Double> listaNi, double aceptacion){
+    /**
+     * Ejecuta la prueba de medias
+     * @param listaNi numeros pseudoaleatorios a los que se les va a aplicar la prueba
+     * @param error valor entre 0 y 1 que indica la tolerancia o margen de error que se va a admitir en la prueba
+     * @return true si pasa la prueba de lo contrario false
+     */
+    public static boolean ejecutarPruebaMedias(ArrayList<Double> listaNi, double error){
         ArrayList<Double> listaRi = obtenerRiNormalizados(listaNi);
         double r = obtenerPromedio(listaRi);
         int n = listaRi.size();
-        double z = Distribucion.calculaNormInv(1-(aceptacion/2));
+        double z = Distribucion.calculaNormInv(1-(error/2));
         double limiteInfe = 0.5-(z*(1/Math.sqrt(12*n)));
         double limiteSupe = 0.5+(z*(1/Math.sqrt(12*n)));
         return (r >= limiteInfe && r <= limiteSupe);
@@ -77,17 +98,27 @@ public class Prueba {
         return gradosLivertad * Math.pow(1 - (2 / (9 * gradosLivertad)) + (z * raiz), 3);
     }
     
-    public static boolean ejecutarPruebaVarianza(ArrayList<Double> listaNi, double aceptacion){
+    /**
+     * aplica la prueba de varianza
+     * @param listaNi numeros pseudoaleatorios a los que se les va a aplicar la prueba
+     * @param error valor entre 0 y 1 que indica la tolerancia o margen de error que se va a admitir en la prueba
+     * @return true si pasa la prueba de lo contrario false
+     */
+    public static boolean ejecutarPruebaVarianza(ArrayList<Double> listaNi, double error){
         ArrayList<Double> listaRi = obtenerRiNormalizados(listaNi);
         int n = listaRi.size();
         double varianza = calcularVarianza(listaRi);
-        double chiInfe = chi2Invert(aceptacion/2, n-1);
-        double chiSup = chi2Invert(1-(aceptacion/2), n-1);
+        double chiInfe = chi2Invert(error/2, n-1);
+        double chiSup = chi2Invert(1-(error/2), n-1);
         double limitInfe = chiInfe/(12*(n-1));
         double limitSupe = chiSup/(12*n-1);
         return (varianza >= limitSupe && varianza <= limitInfe);
     }
-    
+    /**
+     * Calcula la varianza de una lista de numeros
+     * @param listaRi lista de numeros a evaluar
+     * @return valor de la varianza 
+     */
     private static double calcularVarianza(ArrayList<Double> listaRi) {
         double promedio = obtenerPromedio(listaRi);
         double varianza = 0;
@@ -96,7 +127,11 @@ public class Prueba {
         }
         return (varianza) / (listaRi.size() - 1);
     }
-    
+    /**
+     * ejecuta la prueba Kolmogórov-Smirnov
+     * @param listaNi numeros pseudoaleatorios a los que se les va a aplicar la prueba
+     * @return true si pasa la prueba de lo contrario false
+     */
     public static boolean ejecutarPruebaKS(ArrayList<Double> listaNi){
         ArrayList<Double> listaRi = obtenerRiNormalizados(listaNi);
         int n = listaRi.size();
@@ -130,7 +165,12 @@ public class Prueba {
         }
         return diferencia < (1.36) / Math.sqrt(n);
     }
-    
+    /**
+     * aplica la prueba chi2
+     * @param listaNi numeros pseudoaleatorios a los que se les va a aplicar la prueba
+     * @param cantidadIntervalos numero de intervalos para la prueba
+     * @return true si pasa la prueba de lo contrario false
+     */
     public static boolean ejecutarPruebaChi2(ArrayList<Double> listaNi, int cantidadIntervalos){
         double[] intervalos = new double[cantidadIntervalos];
         double[] frecuencias = new double[cantidadIntervalos];
