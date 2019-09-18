@@ -28,10 +28,8 @@ public class CuadradosMedios {
     private int extraerX(String numero, int k) {
         int longitud = numero.length();
         if (longitud % 2 > 0 || longitud < semilla.length()) {
-            System.out.println("-....");
             numero = rellenar(numero);
         }
-        System.out.println("se " + numero.length());
         return Integer.parseInt(numero.substring((semilla.length() / 2) - k, (semilla.length() / 2) + k));
     }
 
@@ -42,7 +40,6 @@ public class CuadradosMedios {
      * @return numero rellenado con cifras faltantes
      */
     private String rellenar(String numero) {
-        System.out.println("s1 " + semilla + "   -  " + numero + " " + (semilla.length() - numero.length()));
         int diferencia = (semilla.length() - numero.length());
         for (int i = 0; i < diferencia; i++) {
             numero = "0" + numero;
